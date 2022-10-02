@@ -1,0 +1,34 @@
+<p>dirctives works!</p>
+<p>--------------------------Structure & Attribute Directives------------------------</p>
+<button class="btn btn-success" (click)="btnBoolean =!btnBoolean">Numbers</button>
+
+<div *ngIf="btnBoolean">
+    <p *ngFor="let oddNumbers of odd"
+    [ngClass]="{oddCls: oddNumbers % 2 !== 0}"
+    [ngStyle]="{backgroundColor: oddNumbers % 2 !==0 ?'skyblue':'yellow'}"
+    >{{oddNumbers}}</p>
+</div>
+<div *ngIf="!btnBoolean">
+    <p *ngFor="let evenNumbers of even"
+    [ngClass]="{evenCls: evenNumbers % 2 !== 0}"
+    [ngStyle]="{backgroundColor: evenNumbers % 2 !==0 ?'skyblue':'yellow'}"
+    >{{evenNumbers}}</p>
+</div>
+
+<hr>
+<p>--------------------------- @Dirctives-----------------------</p>
+<hr>
+<p app-DirOne>Style me with app-Directive</p>
+<p app-DirTwo>Style me with renderer DirTwo</p>
+<p app-HostListener>Style me with Hostlistner</p>
+<p app-HostListener [mouseOver]="'red'" [mouseLeave]="'yellow'">Style me with Hostlistner and input attribute</p>
+<h4 *appDirFour="!btnBoolean">Building a custom directive</h4>
+
+<p> ng switch as dirction </p>
+<div [ngSwitch]="valueSwitch">
+    
+    <p *ngSwitchCase="5">the value is 5</p>
+    <p *ngSwitchCase="10">the value is 10</p>
+    <p *ngSwitchCase="15">the value is 15</p>
+    <p *ngSwitchDefault>the value is over 15 ...</p>
+</div>

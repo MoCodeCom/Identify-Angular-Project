@@ -1,0 +1,21 @@
+
+
+<div class="row">
+    <div class="col-sx-12">
+        <input type="text" class="form-control" [(ngModel)]="newValue">
+        <button class="btn btn-warning" (click)="value_1_fun()">Value 1</button> <br><br>
+        <button class="btn btn-primary" (click)="value_2_fun()">Value 2</button>
+    </div>
+    <hr>
+    <p>------ local Reference in HTML # ----------------------</p>
+    <input type="text" class="form-control" #referenceInputValue>
+    <button class="btn btn-primary" (click)="GetReference(referenceInputValue)">Get Reference</button>
+    <hr>
+    <P>------ local Reference in TS  @ViweChild()-------------</P>
+    <input type="text" class="form-control" #referenceInputChild>
+    <button class="btn btn-primary" (click)="GetReferenceChild()">Get Reference</button>
+
+</div>
+
+
+

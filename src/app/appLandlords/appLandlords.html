@@ -1,0 +1,49 @@
+<hr>
+<p>-----  String intropulation binding "{{" function() OR object "}}"------</p>
+<h4> {{"landlord info"}} by object : {{nameComponent}}</h4>
+<h4> {{"landlord info"}} by object :  {{idEvent()}}</h4>
+<hr>
+<p>-----  property binding [property]------</p>
+<button class="btn btn-primary" [disabled]= "allowBtn" > Click me </button>
+<h4 class="text-center" [hidden] = "allowBtn"> Start choosing ...{{allowBtn}}</h4>
+<hr>
+<p>-----  Event binding (binding)=""--------</p>
+<button class="btn btn-primary" (click)="IsInfoAvailable()">Check if it is available</button>
+<p>{{isinfoavailable}}</p>
+<hr>
+<p>----  DollarSigne Event ($event) --------</p>
+<input class="form-control" 
+       (input)="OnEnterVal($event)"
+       type="text"/>
+<p>{{inputValue}}</p>
+<hr>
+<p>----  Two way values with [(ngModel)]--------------------</p>
+
+<h4>{{GetLandlordName()}}</h4>
+
+<input class="form-control"
+       [(ngModel)]="DefaultPlaceholder"/>
+<p [ngStyle]="{backgroundColor: 'blue'}"
+   [ngClass]="{onLine:checkDirctiveBoolean === true}"
+>{{DefaultPlaceholder}}</p>
+<hr>
+<p>----  Dirctive + if condeition ---------------------------</p>
+<button class="btn btn-warning" (click)="GetDirctive()">Dirctive</button>
+<p *ngIf="DirctiveBoolean"
+[ngStyle]="{'backgroudColor': 'blue'}">{{DirctiveBoolean}}</p>
+<hr>
+<button class="btn btn-warning" (click)="GetDataByDirctive()">Dirctive check</button>
+<p *ngIf="checkDirctiveBoolean;else onNoExist"
+[ngStyle]="{backgroundColor: GetColor()}"
+[ngClass]="{onLine:checkDirctiveBoolean === true}">{{ExistData}}</p>
+<hr>
+
+
+
+<ng-template #onNoExist>
+    <p>The name is NOT exist.</p>
+</ng-template>
+<hr>
+<p>---- for loop  -------------------------------------------</p>
+<button class="btn btn-warning" (click)="Getloop()">For loop</button>
+<h4 *ngFor="let n of arrList">{{n}}</h4>

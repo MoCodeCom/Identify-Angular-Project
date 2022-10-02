@@ -1,0 +1,13 @@
+<p>service-test-two works!</p>
+<input type="text" class="form-control" [(ngModel)]="statusData"/>
+<p>{{strData | MyPipe}}</p>
+<p>{{money_1 | currency:'GBP'}}</p>
+<p>{{testPipe | MyPipe}}</p>
+<p>{{money_1 | MyPipe}}</p>
+
+
+<button class="btn btn-warning" (click)="GetValue()">Implement component 2 </button>
+<hr>
+<h5>{{dateData | date}}</h5>
+<p>{{fullDate | date:'shortDate' | uppercase}}</p>
+

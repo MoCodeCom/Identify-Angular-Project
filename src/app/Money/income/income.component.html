@@ -1,0 +1,10 @@
+<p>----- @Input ------------------------</p>
+
+<p>{{element.type}}</p>
+
+<h5 *ngIf="element.payment === 100" style="color:red">{{element.payment}}</h5>
+<h5 *ngIf="element.payment < 100 && element.payment !== 1 && element.payment !== 2" style="color:blue">{{element.payment}}</h5>
+<p *ngIf="element.payment === 1" style="color:yellow; background-color: black;">{{element.payment}}</p>
+<p *ngIf="element.payment === 2" style="color:greenyellow; background-color: black;">{{element.payment}}</p>
+
+<ng-content></ng-content>

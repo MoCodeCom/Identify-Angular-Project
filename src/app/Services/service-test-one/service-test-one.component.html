@@ -1,0 +1,26 @@
+<p>service-test-one works!</p>
+<button class="btn btn-primary" (click)="GetService()">Get service</button>
+<hr>
+<p>{{dataFromService_2ToSerivce_1}}</p>
+<hr>
+<p>{{state|async}}</p>
+<hr>
+<div>
+  <input type="number"
+  #paramVal
+  [(ngModel)]="userIdValue">
+  <button (click)="GetPageOne(userIdValue)" >adding page value</button>
+</div>
+<hr>
+<!-- parameter and fragment example -->
+<!--<a [routerLink]="['/service',5,'hasan','Edit']"
+   [queryParams]="{allowEdit:userIdValue === 3?'1':'0'}"
+   fragment="loading"
+   >{{userName}}</a>-->
+<h3 *ngIf="AllowBoolean === false">no compatable value</h3>
+<div *ngIf="AllowBoolean === true">
+  <router-outlet></router-outlet>
+</div>
+
+
+

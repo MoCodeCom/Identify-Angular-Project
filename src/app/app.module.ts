@@ -22,14 +22,12 @@ import { ServiceTestTwoComponent } from './Services/service-test-two/service-tes
 import { pipe1 } from './Pipes/pipe_1.pipe';
 //<-------------------------> root <--------------------------------->
 //import { Routes, RouterModule } from '@angular/router';
-import { serviceOne } from './Services/serviceOne.service';
-import { serviceTwo } from './Services/serviceTwo.service';
-import { HomeComponent } from './Pages/home/home.component';
-import { Page1Component } from './Pages/page1/page1.component';
-import { Page2Component } from './Pages/page2/page2.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+
 import { AppRoutingModelComponent } from './app-routing-model/app-routing-model.component';
 import { AppRoutingModel } from './app-routing.model' // about routs class and declerations.
+import { AuthService } from 'src/auth.service';
+import { AuthGuard } from 'src/AuthGuardSerivce.service';
+
 
 
 
@@ -51,18 +49,15 @@ import { AppRoutingModel } from './app-routing.model' // about routs class and d
     ServiceTestOneComponent,
     ServiceTestTwoComponent,
     pipe1,
-    AppRoutingModelComponent
+    AppRoutingModelComponent,
 
   ],
   imports: [
     AppRoutingModel,
     BrowserModule,
-    //AppRoutingModule,
-    FormsModule,
-
-
+    FormsModule
   ],
-  providers: [MessageInjectable],
+  providers: [MessageInjectable, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,12 +6,16 @@
         <ul class="navbar-nav">
           <li role="presentation" class="nav-item active" routerLinkActive="active"><a class="nav-link " routerLink="*">Home</a></li>
           <li role="presentation" class="nav-item" routerLinkActive="active"><a class="nav-link " routerLink="page1">page1</a></li>
-          <li role="presentation" class="nav-item" routerLinkActive="active"><a class="nav-link " routerLink="/page2">page2</a></li>
+          <li role="presentation" class="nav-item" routerLinkActive="active"><a class="nav-link " routerLink="page2">page2</a></li>
           <li role="presentation" class="nav-item" routerLinkActive="active"><a class="nav-link " [routerLink]="['/service']">Service</a></li>
+          <li role="presentation" class="nav-item" routerLinkActive="active"><a class="nav-link " routerLink="page3">page3</a></li>
+          <li role="presentation" class="nav-item" routerLinkActive="active"><a class="nav-link " routerLink="page4">page4</a></li>
         </ul>
       </div>
     </nav>
 
+    <h3 *ngIf="didActivated">page 4 is activated ...</h3>
+    <h4 *ngIf="didActivatedSubject">Activated by subject ...</h4>
 
 
       <!--

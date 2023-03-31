@@ -1,0 +1,448 @@
+-> Install npm = npm install -g @angular/cli @latest(optional)
+-> Install angular project = ng new appName
+-> You have the option to create file by your self to put angular info OR by cli code : ng new appFile
+-> To access to the file : cd appFile
+-> Then to late the ng serve uder service : ng serve
+-> Install bootstrap in the project: npm install --save bootstrap@3 OR latest
+->------------------------------------ Moduels ----------------------------------------<-
+ngModul: decorator for Moduels inside has(declerations, imports, porvides, bootstrap[ about carried the app module ])
+imports: about allow to add other module to current module.
+porvides: for serivese that injects in the module.
+bootstrap: to invok the app Components.
+declerations: use to declare of Components in the module that should implemets. 
+-> decorate: it is a normal function to decorate the class below, also in represent a meta data for a class that implement in it.
+
+-> -----------------------------------Components---------------------------------------<-
+Components: Components is a key feature in an angular.
+-> Generate Components CLI: ng generate component componentName OR ng g c nameComponent
+-> We can nest other component in component template by use | template : ` <component></>`
+-> Style: Is an array for number of style sheets that could be submited for same HTML file.
+   Then -> angular.json -> style -> "node_modules/bootstrap/dist/css/bootstrap.min.css", and in script ["node_modules/bootstrap/dist/js/bootstrap.min.js"]
+
+-> ---------------------------------- Binding -----------------------------------------<-
+Binding: binding is communication between TS file and HTML.
+From: TS ==> HTML + output data +
+    String intrpolation (  {{data}}  )
+    Property Binding (  [property]=data   )
+From: HTML ==> TS + react to events +
+    Event Binding (  (event)='expression'  )
+
+-> ----------------------------------- Diractive --------------------------------------<-
+*ngIf / *ngFor /
+->Diractive: Diractive are instractions in the DOM. And that by use ngDirctive selector.
+->ng-template // ng-Style:: Used in HTML to inject OR change designe of some html elemet in page by Diractives.
+*********************************** Deep *******************************************************
+-> Attribute Diractive : as a normal HTML /only change the element that effected.
+-> Structual Diractive: same attribute dirctive with more effect on the DOM as all.
+-> @Directive(): Create directive manually is a decorateor that use inside the TS file to create speacial directives attribute.
+-> Create Directive automatically: By useing angular CLI: ng g d
+-> As input attribute in directive: [attributeName]="'string'", it could be as attributeName="string"
+-> if the alians name same directive name could be [directiveName]="'string'" *** but it could be less clear with long code.
+-> Building custom Dirctive: by using | @input() set nameofcondition |
+
+->------------------------------------- Elements @input--------------------------------------<-
+->In Html properties and events Elements are native BUT in components & Diractive Elemets are customs.
+->Note: the elemets in component are not allowed form outside the components.
+->To allow for access to the property inside other component by use decoreator front of property :@input()
+->To pass the data out of component, can use the property and infront it decorate: @output()
+
+->------------------------------------- template # reference --------------------------------<-
+-> Reference (#): Reference a signe can we use it in template [just in template] to pass the data between the HTML elements.
+-> @ViewChild('reference name') is the decorator in the fornt of any property that you want to contact it with the DOM of 
+the same component.
+
+->------------------------------------- <ng-content> -----------------------------------------<-
+-> <ng-content> is the tag sign to move the HTML content to show it in the parent dom between the component tag.
+- @ngContent('content reference name') just in case there are no content but rather then that there is a ng-content
+  , can use just as @ViewChild() way.
+->------------------------------------- Life cycle ----------------------------------------<-
+
+ngOnChanges: Called after a bound input property changes.
+ngOnInit: Called once the component is initialized.
+ngDoCheck: Called during every change detection run.
+ngAfterContentInit: Called after content (ng-content) has been projected into view.
+ngAfterContentChecked: Called every time the projected content has been checked.
+ngAfterViewInit: Called after the component’s view (and child views) has been initialized.
+ngAfterViewChecked: Called every time the view (and child views) have been checked.
+ngOnDestroy: Called once the component is about to be destroyed.
+
+
+-> ---------------- notes ------------------------<-
+-> ng indecates <ng-template>
+-> ngSwitch
+
+
+-> --------------- Services ----------------------<-
+-> What is services: it is a typescript files which provide the serivce to the components.
+-> wrong useing for service by call it as normal class inside component typescript files, otherwise should call it in constructor 
+   as a normal property, and in decorate under provid signe providers = ['service class name'] (instance), then can use service class as a 
+   static class in c#.
+-> service come without meta data (decoreator);
+-> Hierarchical Injector:
+   * App Module: Same instance of service is available Applicetion wide.
+   * App component: Same instance of service is available for all component (but not for other services).
+   * Any other component: Same instance of serivce is available the component and all its child components.
+-> Note about serives: it the parent has service in porvides (instance), that mean not register provides serivces in 
+   the childs (serivce will not working) (no instance again in chiled), just import and private in constructor.
+-> 
+
+-> ----------------------  Pipes -------------------------- <-
+-> Pipes: are simple functions to use in template expressions to accept an input value and return a transformed value.
+-> To get more pipe, can get it by angular website -> Documents -> reference -> refence API.
+-> customise pipe: by create ts file with implement PipeTransform and decorate in fornt of class @Pipe({ name : 'pipe name'}).
+-> by pipe name, to call pipe in DOM.
+-> parameter is available in pipe, <p>{{propertyName | pipeName: parameter1: parameter2 ...}}</p>
+-> Aysnc pipe can deal with the promis functions.
+-> 
+
+-> ----------------------  Route ---------------------------<-
+-> What is route in angular? it is ONE page configuration splite to many in the HTML app, the main page.
+-> should configer all the pages in the app.module.ts, as object array for paths and components. And in decorate under imports
+   to activate it in angular as RoutModul.forRoot(arrayObjectRoote). 
+-> In app main page should use tag: <router-outlate>, that will gouther all the pages rout in one tag.
+-> To active the roots in the main page of app we can use: ul>li>a> for each page.
+-> In <a link navegator we should use routerLink='/pageNameInRouter'.
+-> Just in case, if the link as a string, we should use [routerLink]=['/pageNameInRouter','/root','/root',...] as property.
+-> ( style links )RouterLinkActive="Active" is the additional signe to the <li about to the tage to activate it or not.
+-> ( style links )[RouterLindActiveOption]="{exact:true}" usually it add to the home or the page with link '*' to unactivate it when unselected.
+-> To load page by ts code: it possible by call | this.router.navigate(['pageName in module']) | adding page name as a property.
+-> Note: relative path is: path without ./ or /, it looks like just (pageName). And adding object to select the relative active rout
+   to be the code as : this.router.navigate(['pageName such as in model'], {relativeTo: this.route}), this route come From
+   'private route:ActivateRoute' in constructor as dependency injection.
+-> Passing parameter by rout, by adding '/:parameter' after link in app.model. example:{path:'page1',component:Page1Component.
+-> Fatch data from link, we can do that by code in parameter by using as private route:ActivateRoute, and call parameter by 
+   this.route.snapshot.params['id'].
+-> To update the parameter according to the button of the same link, we can use this.route.params.subscribe((p:params)
+   =>{this.user.id = param['id']}), that mean push data in parameters.
+-> rx/js: is not shipping with angular, it has the subscription issues.
+-> also could distroy the push data in params links, and that by unsubsripe in OnDistroy(). The unsubscribe is called by rx/js and 
+   create new property with type subscription.
+-> Adding quiryParams: Also it is possible to pass params form other page link by path='./pageName/:param/:param/whatever...'
+-> QuiryParams = ? to add it we should write [queryParams]={object to show in link such as ... 'value',number}
+-> Fragment = # to add it in link we have to add= Fragment = 'value', note fragment without brakets.
+-> To show quiryParams and fragment by the code, we can use method with the code below:
+   this.roter.navigate(['pageName',param1, param2, anyother Name We Want],
+                       {queryParams:{object to show in link such as ... 'value',number}},
+                       fragment:'value');
+-> How can we reach to queryParams or fragment? that by activatedRoute and then we have two way 1.snapshot 2.subscripe;
+   as fatch params before: this.activatedRoute.snapshot.queryParams OR this.activatedRoute.queryParams.subscribe();
+-> children path: using child path when there are number of path have the same link with different additions, such as
+  {path:'service',component:ServiceTestOneComponent},
+  {path:'service/:id/:name/Edit',component:Page2Component} 
+  to gather both of them in main path and childs paths.
+-> to add childern write code as :
+  {path:'service',component:ServiceTestOneComponent, childern:[
+   {path:'service/:id/:name/Edit',component:Page2Component} , ... other childrens
+  ]}
+  
+-> the tage <router-outlate> is respond just for parent paths and not to the childern paths, so 
+-> to respond for child route we should use tag <reouter-outlate> in parent Dom to mintion for childern.
+-> in this.router.navigation(['pageName',...],{relativeTo: this.route, queryParamsHandling:perserve});
+-> re-directive path, it just use - redirectTo:'path'- rather than component name in paths.
+   {path:'**',redirectTo:'nameOfLinkPath'}
+-> using -**- in path for any thing could be write in the link. this kind of paths should be in the end of the list of paths.
+-> For page not found should be write new component for this issue.
+-> Note: should not has a link name white space, simply you will get an error because it is nothing.
+
+------------------ speacial paths file ------------
+-> The angular code need to be more manage and sorted with paths in model file, there for creating new TS file for this issue.
+
+------------------- Guard -------------------------
+-> Guard paths: also we need new TS file to guard paths as services.
+-> We need two services (1) CanActivate() (2)login/logout().
+-> 1) implement CanActivate function. and adding @injectable decorate to inject services inside. 
+-> 2) build service with three functions, login()-logout() and isActivated(). return boolean as promise.
+-> Adding CanActivate in path to activate route.
+-> Moreover we need to add (authservice , authGuardservice) to the provides in app.module.ts
+-> To activate children in path, we can use CanActivateChild in authGuardservice. In this case, the canActivated class can 
+   implement both a canActivate and CanActivateChild.
+-> In activate classes, we can guard a parent path or child paths.
+-> Guard can give us a huge control with paths, for example with login / logout.
+-> Can put data such as message in rout path, 
+
+------------------- Static String From Router ------
+-> Amending page by pass static data form route is possible, that by add data object after component part in path route.
+   Such as, data:{message:'comments'}.
+-> then recall data by component in ngOnInit(), and by using ActivateRoute. 
+   By this.router.data.subscripe() to bring data in component  
+------------------- Dynamic data -------------------
+-> As an example, we can use a server an Dynamic data.
+-> 
+
+------------------- Hide link with # hash ----------
+-> By adding RouterModule.forRoot(appRoutes, {useHash:true}) in import part in app-routing.model.ts file.
+
+----------------------------------------------------
+
+->------------------------------- Observables  -------------------------------------<-
+-> Observer : Such as Events (as in c#),HTTP request or triggerd codes ... , it about handling aysnc data (we now when 
+   it start and we dont now when it end.).
+-> in observer three main parts, Data, Error and complete. All of above could use under observer class.
+-> Observable : is the code that handle data such as Error handle, Handle data or handle completion.
+-> 1) We need rxjs to use an observable smoothly in an applictions. npm install --save rxjs@6.
+-> 2) And install compat, npm install --save rxjs-compat.
+-> subscription and subscribe / subscribtion includes subcribes to have controls that not controls by angular.
+-> Note: very very very rare we build an observables, usually its used dirctly as paramerters subscribtions.
+-> 
+
+->-------------------------------- Operators  --------------------------------------<-
+-> Simply, operator is a pipe in code in the observer suction, to implement funcitons.
+-> Operators: it could to be as apart of observables, it used when data in observable move to subscribe then observer.
+   So, it will implement some operators before subcribes data in observable. Moreover, it could be as injection in observable.
+-> Any observable has a pipe method. That can implement operators. To be in tuch with data of observable.
+-> pipe can take unlimited number of operator functions, to implement it on data.
+-> observer --> opetator ==> subcribes ==> observable
+
+->-------------------------------- Subject -----------------------------------------<-
+-> Form library rxjs.
+-> we can use usbject an alternative of EventEimatter.
+-> we can not use subject in @output.
+-> we can say a subject is a special kid of observable.
+-> Observer ----subscripiton-----> Observable  | Observer ------subscription------> Subject ----(next()).
+-> 
+
+->------------------------------- Form -----------------------------------------------<-
+-> Forms: it is forms that used in angular to submit data to HTTP, rather than normal submit.
+-> Angular has two apporaches to handles forms:
+   1) Template-Driven: submit by HTML(Dom).(EASY WAY)
+   2) Reactive: submit by TS and HTML(Dom).(COMPELEX WAY)
+-> we need to check whather formModel is added to model ts.
+
+-> -----------   Template-Driven    ------------  <-
+-> by using ngModel without any brakets. and add name="".
+-> And use (submit)='functionName()' in the [form tag].
+-> Very necessary addition to the tag is 'form-control' for all form elements to included.
+-> using dirction #name to hold ngForm [form ngForm library], we can reach to the form element value.
+   to get all properties available in form with values.
+-> @ViewChild, could use this decoration as alternative way to push data in ngForm by typescript.
+-> Requierd: to make the input is required, should add required in input tag. so the valid in ngForm will be false if 
+   no enter value(angular control)
+-> Email: In same case to let the user to use just email in input space. should add email in input tag. 
+   so the valid in ngForm will be false if no enter value as email.(angular control)
+-> Disable/able: [disable]='!NgFormDirctionName.valied'. also could add css for input that invalid.
+-> (Error message) help-block: by adding <span class="help-block"> tag , with adding if condition for 
+   email.valid && email.touched. and contact with dirctor #name = ngModel.
+->  [ngModel], we can bind ngModel in one way approach with the property.
+->  [(ngModel)]='property', with adding brackets for ngModel to contact with the property two way. And can use it
+    in dom as {{property}}.
+-> ngModelGroup=' group name ', to add new control and new group value to the from. So, you can use it about sub-group inside of
+   form to reflect messages.
+-> Note: #Dirction ==> ngModel or ngModelGroup ==> *ngIf or *ngFor.
+-> Radio, could use array and use ngFor in dirction tag ==> lable + input- type Radio
+-> SetValue: to set a form element with specific value, we can use setValue method in Ts File. 
+   [For set whole of the form]
+   this.Dirction.setValue({value object...}).
+-> PatchValue: same setValue but for some of the elements in form, set not all of them. pathValue wrapped with form. 
+   [Part of the form]
+   this.Dirction.form.patchValue({value object...}).
+-> reset(): this.@child[OR direction].reset() ==> to reset forms elements.
+
+-> ----------------------------------- HTTP / HTTPS ------------------------------------<-
+-> Anguler contact with server (API (REST Graph QL)) about respond and reqest data.
+-> HTTP request : URL(endpoint) -> post & HTTP verb ->Post, Get, Put ,...
+-> HTTP header : (Metadata)
+-> HTTP body : post, put, get ...
+-> 1) Model => add HTTP in import HttpClientModule && {HttpClientModule} from '@angular/common/http'; 
+-> 2) add in constructor of ts component, HttpClient to use is it then.
+-> 3) inside of http all HTTP requset.
+-> 4) by using Firebase, the link of store data should follow with /post.json or any other data operation.
+-> 5) also, body should just send data. That will convert to json data in browser.
+-> Post (Firebase), this.http.post('link',data).
+-> Fatch Post (Firebase), this.http.get('link').
+-> Note: Pipe is an amending data before subscribe data as observable.
+-> Useing service for responds and requset is very practical to keep Http clear.
+-> Send observable of post, get, delete... can help to subscribe data and clean or update data.
+-> Errors:
+   1 ) We can handle error by subscribtoin, error => and get error to the property.
+   2 ) Subject : by implement the errors in the services. 
+   3 ) catchError [catchError => rxjs/operator] : by using throw [throwError => rxjs] errors.
+   4 ) 
+
+-> Set Header: setting header for a responses is after Http.anyOrder(post,fatch,...)(link, headers: new HttpHeaders(object..)).
+-> Set Params: setting param for a responses is after Http.anyOrder(post,fetch,...)
+   (link, params: new HttpParams().set('param','param')).
+-> Set Params: other way to set param by initial property = new HttpParams();
+   initial property = initial property.append(param,param).
+   And can create more than on parameter.
+-> Using observe after link, that to get some information about 
+   the responses of http to get a control over requset: {observe:'deferent types...'}
+  - events // with event should use operators by pipe(tap(event => console.log(event))).That will give you HttpEventType...
+  - body
+  - response
+-> Using responseType of Http. To select the type of data that saved in firebase:
+  - ResponseType:'josn' OR 'text' OR even as 'bolb' for files..
+  - Note as default: 'json'.
+-> What is intercetor? it is intercept any http requst to conduct for different possible information.
+   To use intercept in angular should follow point below:
+  - Create server for intercept: implement HttpInterceptor, return next.handle(req);
+  - Add specific object to provide in Model.
+-> To add req.Header,body, or... not working, we should use conset property = req.clone({ header:'' ... })
+-> As a return of next.handle(req).[observable using a pipe()]; to use one of pipe operators such as map, tap ... etc.
+-> Multiple interceptor: by create new interceptor server. the order multiple interceptor services could be by provider in module.
+->  
+
+
+->--------------------- Authintication ----------------------------<-
+-> Handling Form input
+  - required
+  - ngModel
+  - id
+  - type
+  - name
+  - email Or passwod Or ...
+  - max or min length as minlength OR maxlength
+-> Form local dirction : #nameLocalDirction='ngFrom'
+-> Auth in button could be by form valid in case input in form is required.
+-> Froward dirction value of form to ts by (ngSubmit)="method(ngForm 'the dirction name')".
+   Or by using @ViewChild() in ts.
+-> Password and Email Authintication in Firebase, it should make rule for data as "auth != null" for write and read.
+-> Then create Auth in firebase, by select password and email.
+-> An error two way to throw it:
+ 1- in ts file: with swich operation and using errorVal.error.error.message... to create paragraph content value.
+ 2- by service: throw pipe observable of service [signIn method].pip(catchError(...=>{...}))
+-> 
+
+
+
+->--------------------- Firebase ---------------------<-
+-> Keyproject? is a key supported by each project by firebase. and it used in backend firebase such as in auth.
+-> How get Keyproject? project overview => sitting => Keyproject property.
+-> to get firebase web sing in / sign up link => 
+   https://firebase.google.com/docs/reference/rest/auth#section-create-email-password
+-> 
+
+
+->-------------------- Dynamic component --------------<-
+-> the example for Dynamic component in Auth file and placeholder folder.
+-> It is the component that used when needed, such as by ngIf or other dirctor.
+-> Component factory resorver: is the class that allowed to create component programtly; bring it as private property.
+-> -------------------- progrmatically instantiate component --------------------<-
+ - inject component factory resolver in ts file of component.
+ - factory resolver should has the component that we want to instantiate in nested component.
+ - create placeholder directive to use in DOM.
+ - in directive's constructor use property as public with type ViewContainerRef. and add placeholder in model of app.
+ - using <ng-template> in DOM. to contain the new container then the creating component.
+ - then create @ViewChild(Directive)name:dirctive, should ensure the directive is imported.
+ - the ViewChild property will use in the function to contain the error message by createComponent(error).
+ - Data binding with the ViewContainerRef by using .instance.property in component that bring.
+ - and should create OnDistroy to destory component.
+ 
+
+->------------------------ Module ---------------------------<-
+-> Appmodule: Angular analyzes NgModules to 'understand' your application and its features.
+ - AppComponent => Angular modules define all building blocks your app uses: 
+   > component , > Dirctives, > Services ...
+ - ProductsComponent => An app requires at least one module (AppModule) but may be split into
+   multiple modules.
+ - HighlightDirective => Core Angular features are included in Angular modules (e.g. FormsModule)
+   to load them only when needed.
+ - ProductsService => You can't use a feature / building block without including it in a module.
+  -----------------------------------------------------------------------------
+-> imports: it is a part that to contact with diffrent other modules (e.g. Forms,HttpClientModule ...).
+-> providedIn: other part in module that provide services in appliction, also the other way to show provideIn in 
+   declerations of services as injectable.
+-> bootstrap array: to provide a root bootstrap array component in app.
+-> entryComponents: it is used when we need to use one of element as dirctive programtly.
+-> make a multiple modules let the code much leaner and mantainable and much foucs.
+-> every modules not contact with other modules in app, just in case of export or import with other modules.
+-> When split module to number of module may face issue:
+ - [imports] about the imports that should we bring it to the module to help it to work with components features.
+   in other word need to import all the feature that make the components work.
+
+-> Note: commenModule // for any other moudel out of appModule.
+-> What is Shared module? it is a module file with shared components of different compoenent files to service all of them.
+-> Note: Import a module more than one time in different other module is OK, but the declarations are not allowed.
+-> What is the core Module? it is a concept to saparate the app module to two parts
+   1 - the services in module, that come form providsIn. it should to be in saparate module.
+       this module file not need to export ngModule, just declarations need exports.
+   2 - the components and modules in the main module.
+   - anyway it is optional option to super manage services in AppModule.
+-> just in case of share same component in two or more module [the re-write same component in more than one declaration is not allowed]
+   , so we have to call one module in other to bring the specific component in more than one module, in import section.
+-> -----------------> Lazy loading <---------------------------<-
+-> To add lazy loading should stop serve then ng serve again.
+-> 
+
+-> -----------------> Preloading Stratgy <----------------------<-
+-> Is an addition to the forRoot(, preloadingStratigy).
+-> How it is working? it allow to the current path to load first the load the other paths, even it not call to make the web faster.
+-> in other word, it is using for optimise loading.
+-> the code should add is :{ preloadingStrategy : PreloadAllModules } in import of route of main module.
+
+-> ----------------> Services and Modules <-----------------------<-
+-> 
+
+
+->-----------------> Deploy Anguler <-----------------------------<-
+-> deploy project could be 1) static project OR 2) Dynamic project.
+-> For static project just use CLI to deploy project.
+-> For Dynamic project we have an option to customis an APIs in project or not.
+  - to customis an API in project after deploy we can add API Key in invironment file in project, such as
+    firebaseAPIKey. then we can use it in application to change the API key every where in project.
+  - the other way is just build a project as normal without change API option.
+-> [ng bulid] OR in old virsion [ng build --prod]
+-> after build can find the application in js-html-css in dis file.
+-> to test app on computer as server we need http-server, so we can download it by:
+   npm http-server -g => then use it as: http-server dist/name of project...
+-> Using firebase to deploy project by install firebase if not installed:
+ - npm install -g firebase-tools [this will allow you to use firebase anywhere in application.]
+ - firebase login
+ - firebase init
+ - ...dirctory? (public) --> dist/.....file name
+ - rewrite all url...    --> y
+ - next option ... overwrite? --> n
+ - firebase deploy
+ - Then the CLI will give you the url...
+
+
+ -> --------------> standalone component <-------------------------<-
+ -> what is standalone compoenent? it is a normal compoenent in angular without register it in the module as a decleration like
+    other components. its use to make the angular much esear.
+ -> By adding standalone: true, in a @component({}) will activate a component as standalone. In this case you will not need to
+    show the component in a declaration section in module.
+ -> After that you have to add the component class name in import section in module.
+ -> Yes, we just move it from declaration to import, but any other standalone compoenet or dirctive we can pass it by just one
+    standalone component, without need to declare it in module app.
+ -> Standalone component for Root component...
+
+ -> Standalone compoenent with services: should add provide:[serviceName] section in @compoenent() 
+    to contain services inside.
+ -> could add providedIn:'root' in @Injectable() and it could add service name in main.ts in section bootstrap application
+    as new object { providers: [serviceName]}.
+ -> Lazy loading with the standalone component...
+ -> 
+
+
+ -> -----------------------> Animaiton <--------------------------------------<-
+ -> Animation : should add it in the @component({.... Animaiton:[...]}).
+ -> in animation containe trigger functoin and state function, trigger('name', [state('name', style({}))]).
+ -> Each of function's [trigger, state, style] reference is: import { state, style, trigger } from '@angular/animations';
+ -> Animations work with the states in angular.
+ -> to call animation as dicoration in template, should use <p [@triggerName]='propertyName'.
+ -> 
+
+ -> -----------------------> Service worker in angular to work offline <-------------------<-
+ -> Simply, it is a concept to let an app working to get and as interface when an app is offline.
+ -> by add servie in single thread of an applicaion work by cli: ng add @angular/pwa
+    to install angular worker server.
+ -> the file that will install auto generated.
+ -> then re-build an app with the new feature: ng bulid --prod
+ -> we can use a server not in ur computer to avoid use data form same computer,
+    so we can install server there to host our application:
+    **npm install -g http-server 
+    we can use it directly as go to the dist folder and run it in there by: http-server -p 8081
+ -> to change the service worker, could that by config file 'ngsq-config'.
+ -> in install model in config file there is two options, lazy[load when all file ready]
+    OR prefetch [load what ever file available]
+ -> to fatch my web in the browser data, could by add '"urls":["https://.....my applicaion website..."]'.that in the resource 
+    section in assetGroup after file part in the config file. this step can save the app is working even in offline of wifi mode.
+ -> And generate new group as "dataGroups":[...]: that contain:-
+    -"name":"posts",
+    -"urls":["post url"],
+    -"cachConfig":{
+        "maxZise":5, // about the size of data that saved.
+        "maxAge":6h,  //about the time of saving data.
+        "timeout":"10s", 
+        "strategy":"freshness"  //about the strategy of save data.
+       }
+
